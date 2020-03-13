@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+</head>
+
+<body class="bg-dark" style="font-family: Ubuntu;">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    <div class="jumbotron bg-warning">
+        <div class="container">
+          <h1 class="display-4" >Check the weather!</h1>
+          <p class="lead">Hello, you can simply check the weather, just type city name in search bar.</p>
+        </div>
+      </div>
+    <div class="container-fluid bg-dark pt-4 mt-5">
+        <nav class="navbar navbar-light bg-dark ml-3">
+            <form class="form-inline" method="POST">
+              <input class="form-control mr-sm-2" type="search" name="city" placeholder="Enter City Name" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+            {% for weather in weather_data %}
+                <div class="card m-4" style="width: 18rem; display:inline-block;">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="current weather image" ></li>
+                    <li class="list-group-item"><small class="text-secondary">city: </small> {{ weather.city }}</li>
+                    <li class="list-group-item"><small class="text-secondary">temperature: </small> {{ weather.temperature|round|int }} &#8451;</li>
+                    <li class="list-group-item"><small class="text-secondary">description: </small> {{ weather.description }}</li>
+                    <li class="list-group-item"><small class="text-secondary">humidity: </small> {{ weather.humidity }}%</li>
+                    </ul>
+                </div>
+            {% endfor %}
+    </div>
+    <footer style="color: grey; text-align: center;"><small class="mt-4">Created by &reg;mijato, 2020.</small></footer>
+    <hr>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
